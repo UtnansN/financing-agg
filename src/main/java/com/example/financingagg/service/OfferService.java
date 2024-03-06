@@ -22,8 +22,7 @@ public class OfferService {
         return Flux.fromIterable(providers)
                 .parallel()
                 .runOn(Schedulers.parallel())
-                .flatMap(provider ->
-                        Mono.defer(() -> Mono.just(provider.getOffer(offerRequest))))
+                .flatMap(provider -> Mono.defer(() -> Mono.just(provider.getOffer(offerRequest))))
                 .sequential();
     }
 }

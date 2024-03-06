@@ -1,10 +1,13 @@
 package com.example.financingagg.integration.exception;
 
-public class WaitingException extends Exception {
-    public WaitingException() {
-    }
+import lombok.Getter;
 
-    public WaitingException(String message) {
-        super(message);
+@Getter
+public class WaitingException extends RuntimeException {
+
+    private String companyId;
+
+    public WaitingException(String companyId) {
+        this.companyId = companyId;
     }
 }

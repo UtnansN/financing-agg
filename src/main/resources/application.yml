@@ -1,5 +1,5 @@
 retry:
-  max-attempts: 8
+  max-attempts: 10
   max-delay: 2000
 
 integrations:

@@ -1,14 +1,15 @@
-package com.example.financingagg.integration.mapper;
+package com.example.financingagg.integration.mapper.solidbank;
 
 import com.example.financingagg.dto.OfferRequest;
 import com.example.financingagg.integration.dto.solidbank.SolidBankApplicationRequestDto;
+import com.example.financingagg.integration.mapper.OfferMapper;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SolidBankMapper implements OfferMapper<SolidBankApplicationRequestDto> {
 
     @Override
-    public SolidBankApplicationRequestDto toApplicationDto(OfferRequest requestDto) {
+    public SolidBankApplicationRequestDto toApplicationRequestDto(OfferRequest requestDto) {
         return SolidBankApplicationRequestDto.builder()
                 .email(requestDto.getEmail())
                 .phone(requestDto.getPhone())
