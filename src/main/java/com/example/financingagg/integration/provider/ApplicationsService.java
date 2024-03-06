@@ -28,10 +28,11 @@ public class ApplicationsService {
 
     public UUID createApplication(String url, Object createApplicationDto) {
         var postResponse = restTemplate.postForEntity(url, createApplicationDto, Application.class);
-        if (postResponse.getStatusCode() != HttpStatus.CREATED || !postResponse.hasBody()) {
+        var body = postResponse.getBody();
+        if (postResponse.getStatusCode() != HttpStatus.CREATED || body == null) {
             return null;
         }
-        return postResponse.getBody().getId();
+        return body.getId();
     }
 
     @Retryable(retryFor = WaitingException.class,
@@ -45,14 +46,14 @@ public class ApplicationsService {
         var applicationDto = restTemplate.getForEntity("%s/%s".formatted(applicationsUrl, applicationId), Application.class);
         var body = applicationDto.getBody();
 
-        if (applicationDto.getStatusCode() != HttpStatus.OK) {
+        if (body == null || applicationDto.getStatusCode() != HttpStatus.OK) {
             log.error("There was an issue accessing the application with id: {}", companyId);
             return CompanyOffer.fail(companyId, "There was an issue applying for the offer.");
         }
 
         var applicationStatus = body.getStatus();
         if (applicationStatus == ApplicationStatus.DRAFT) {
-            log.info("Application for company {} is still in DRAFT state - retrying", companyId);
+            log.info("Application for company {} is still in DRAFT state", companyId);
             throw new WaitingException(companyId);
         }
 
@@ -62,7 +63,7 @@ public class ApplicationsService {
             return CompanyOffer.success(companyId, offer);
         }
 
-        var message = "Company %s was unable to provide an offer".formatted(companyId);
+        var message = "Company %s was unable to provide an offer for the given inputs".formatted(companyId);
         log.info(message);
         return CompanyOffer.fail(companyId, message);
     }

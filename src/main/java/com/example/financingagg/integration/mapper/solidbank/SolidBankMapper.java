@@ -5,6 +5,7 @@ import com.example.financingagg.integration.dto.solidbank.SolidBankApplicationRe
 import com.example.financingagg.integration.mapper.OfferMapper;
 import org.springframework.stereotype.Component;
 
+// Can use mapstruct here.
 @Component
 public class SolidBankMapper implements OfferMapper<SolidBankApplicationRequestDto> {
 

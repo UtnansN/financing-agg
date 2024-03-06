@@ -1,0 +1,9 @@
+retry:
+  max-attempts: 5
+  max-delay: 50
+
+integrations:
+    fast-bank:
+      applications-url: https://shop.uat.klix.app:443/api/FastBank/applications
+    solid-bank:
+      applications-url: https://shop.uat.klix.app:443/api/SolidBank/applications

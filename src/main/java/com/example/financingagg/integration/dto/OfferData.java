@@ -1,5 +1,6 @@
 package com.example.financingagg.integration.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
  * Leaving it as a common thing here due to convenience.
  */
 @Data
+@Builder
 public class OfferData {
     private BigDecimal monthlyPaymentAmount;
 

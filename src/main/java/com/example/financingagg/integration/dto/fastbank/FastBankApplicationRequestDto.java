@@ -2,6 +2,7 @@ package com.example.financingagg.integration.dto.fastbank;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,14 +18,18 @@ public class FastBankApplicationRequestDto {
     @Email
     private String email;
 
+    @PositiveOrZero
     private BigDecimal monthlyIncomeAmount;
 
+    @PositiveOrZero
     private BigDecimal monthlyCreditLiabilities;
 
+    @PositiveOrZero
     private int dependents;
 
     private boolean agreeToDataSharing;
 
+    @PositiveOrZero
     private BigDecimal amount;
 
 }
